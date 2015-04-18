@@ -7,7 +7,10 @@ defining `buildURL` as described in [RFC #4](https://github.com/emberjs/rfcs/pul
 
 ## Usage
 
-`npm install --save-dev ember-data-url-templates`
+```shell
+ember install ember-data-url-templates
+ember generate ember-data-url-templates
+```
 
 ```javascript
 // adapters/comment

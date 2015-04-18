@@ -1,11 +1,13 @@
 import Ember from 'ember';
+
+/* global UriTemplate */
 var get = Ember.get;
 var isArray = Ember.isArray;
 var sanitize = encodeURIComponent;
 
 export default Ember.Mixin.create({
   buildURL: function(type, id, snapshot /*, requestType */) {
-    var template = _compileTemplate(this.get('urlTemplate'));
+    var template = new UriTemplate(this.get('urlTemplate'));
     var templateResolver = this.templateResolverFor(type);
     var adapter = this;
 
@@ -46,25 +48,4 @@ export default Ember.Mixin.create({
     return Ember.String.pluralize(camelized);
   }
 });
-
-// TODO: Use fully compliant rfc6570 library
-var _compileTemplate = function(template) {
-  return Ember.Object.create({
-    template: template,
-    fill: function(fn) {
-      return this.get('template').replace(/\{([\/?+]?)(\w+)\}/g, function(_, prefix, name) {
-        var result = fn(name);
-
-        if (prefix === '?') { prefix = '?' + name + '='; }
-        if (prefix === '+') { prefix = ''; }
-
-        if (result) {
-          return prefix + result;
-        } else {
-          return '';
-        }
-      });
-    }
-  });
-};
 
