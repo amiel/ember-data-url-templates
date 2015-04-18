@@ -4,7 +4,7 @@ var isArray = Ember.isArray;
 var sanitize = encodeURIComponent;
 
 export default Ember.Mixin.create({
-  buildURL: function(type, id, snapshot, requestType) {
+  buildURL: function(type, id, snapshot /*, requestType */) {
     var template = _compileTemplate(this.get('urlTemplate'));
     var templateResolver = this.templateResolverFor(type);
     var adapter = this;
@@ -21,7 +21,7 @@ export default Ember.Mixin.create({
   },
 
   // TODO: Add ability to customize templateResolver
-  templateResolverFor: function(type) {
+  templateResolverFor: function(/* type */) {
     return Ember.Object.create(get(this, 'urlSegments'));
   },
 
@@ -30,7 +30,7 @@ export default Ember.Mixin.create({
     namespace: function() { return this.get('namespace'); },
     pathForType: function(type) { return this.pathForType(type); },
 
-    id: function(type, id, record) {
+    id: function(type, id) {
       if (id && !isArray(id)) { return sanitize(id); }
     },
 
@@ -39,8 +39,12 @@ export default Ember.Mixin.create({
         return get(snapshot, key);
       };
     }
-  }
+  },
 
+  pathForType: function(type) {
+    var camelized = Ember.String.camelize(type);
+    return Ember.String.pluralize(camelized);
+  }
 });
 
 // TODO: Use fully compliant rfc6570 library
