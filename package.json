@@ -1,6 +1,6 @@
 {
   "name": "ember-data-url-templates",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Use url templates to configure ember-data adpter urls. More information at https://github.com/emberjs/rfcs/pull/4",
   "directories": {
     "doc": "doc",
