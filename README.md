@@ -1,25 +1,35 @@
-# Ember-data-url-templates
+# ember-data-url-templates
 
-This README outlines the details of collaborating on this Ember addon.
+[![Build Status](https://travis-ci.org/amiel/ember-data-url-templates.svg)](https://travis-ci.org/amiel/ember-data-url-templates)
 
-## Installation
+ember-data-url-templates is an addon to allow building urls with url templates instead of
+defining `buildURL` as described in [RFC #4](https://github.com/emberjs/rfcs/pull/4).
+
+## Usage
+
+`npm install --save-dev ember-data-url-templates`
+
+```javascript
+// adapters/comment
+
+import DS from "ember-data";
+import UrlTemplates from "ember-data-url-templates";
+
+extend default DS.RESTAdapter(UrlTemplates, {
+  urlTemplate: '{+host}/posts/{postId}/comments{/id}'
+});
+```
+
+## Contributing
+
+### Installation
 
 * `git clone` this repository
 * `npm install`
 * `bower install`
 
-## Running
+### Running Tests
 
-* `ember server`
-* Visit your app at http://localhost:4200.
-
-## Running Tests
-
-* `ember test`
+* `ember test` or
 * `ember test --server`
 
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
