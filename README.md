@@ -36,3 +36,10 @@ extend default DS.RESTAdapter(UrlTemplates, {
 * `ember test` or
 * `ember test --server`
 
+## TODO
+
+Here is a short list of things I'd like to support:
+
+* Optionally specify a template for each requestType
+* Use a template provided by the API (like `links`)
+* Use the query from `findQuery` to fill the template
