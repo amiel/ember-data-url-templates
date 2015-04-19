@@ -1,13 +1,14 @@
 import Ember from 'ember';
 
 /* global UriTemplate */
+
 var get = Ember.get;
 var isArray = Ember.isArray;
 var sanitize = encodeURIComponent;
 
 export default Ember.Mixin.create({
-  buildURL: function(type, id, snapshot /*, requestType */) {
-    var template = new UriTemplate(this.get('urlTemplate'));
+  buildURL: function(type, id, snapshot, requestType) {
+    var template = this.getTemplate(requestType);
     var templateResolver = this.templateResolverFor(type);
     var adapter = this;
 
@@ -20,6 +21,11 @@ export default Ember.Mixin.create({
         return result;
       }
     });
+  },
+
+  getTemplate: function(requestType) {
+    var templateName = this.get(requestType + 'UrlTemplate') || this.get('urlTemplate');
+    return new UriTemplate(templateName);
   },
 
   // TODO: Add ability to customize templateResolver

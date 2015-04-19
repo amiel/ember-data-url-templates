@@ -7,10 +7,14 @@ defining `buildURL` as described in [RFC #4](https://github.com/emberjs/rfcs/pul
 
 ## Usage
 
+### Installation
+
 ```shell
 ember install ember-data-url-templates
 ember generate ember-data-url-templates
 ```
+
+### Synopsis
 
 ```javascript
 // adapters/comment
@@ -19,6 +23,7 @@ import DS from "ember-data";
 import UrlTemplates from "ember-data-url-templates";
 
 extend default DS.RESTAdapter(UrlTemplates, {
+  findUrlTemplate: '{+host}/comments/{id}',
   urlTemplate: '{+host}/posts/{postId}/comments{/id}'
 });
 ```
