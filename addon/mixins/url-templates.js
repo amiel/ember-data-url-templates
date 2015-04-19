@@ -10,7 +10,7 @@ var isObject = function(object) { return typeof object === 'object'; };
 
 export default Ember.Mixin.create({
   buildURL: function(type, id, snapshot, requestType) {
-    var template = this.getTemplate(requestType);
+    var template = this.compileTemplate(this.getTemplate(requestType));
     var templateResolver = this.templateResolverFor(type);
     var adapter = this;
 
@@ -26,8 +26,11 @@ export default Ember.Mixin.create({
   },
 
   getTemplate: function(requestType) {
-    var templateName = this.get(requestType + 'UrlTemplate') || this.get('urlTemplate');
-    return new UriTemplate(templateName);
+    return this.get(requestType + 'UrlTemplate') || this.get('urlTemplate');
+  },
+
+  compileTemplate: function(template) {
+    return new UriTemplate(template);
   },
 
   // TODO: Add ability to customize templateResolver
