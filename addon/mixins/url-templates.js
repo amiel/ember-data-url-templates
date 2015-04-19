@@ -6,6 +6,8 @@ var get = Ember.get;
 var isArray = Ember.isArray;
 var sanitize = encodeURIComponent;
 
+var isObject = function(object) { return typeof object === 'object'; };
+
 export default Ember.Mixin.create({
   buildURL: function(type, id, snapshot, requestType) {
     var template = this.getTemplate(requestType);
@@ -39,12 +41,17 @@ export default Ember.Mixin.create({
     pathForType: function(type) { return this.pathForType(type); },
 
     id: function(type, id) {
-      if (id && !isArray(id)) { return sanitize(id); }
+      if (id && !isArray(id) && !isObject(id)) { return sanitize(id); }
+    },
+
+    query: function(type, id) {
+      if (isObject(id)) { return id; }
     },
 
     unknownProperty: function(key) {
       return function(type, id, snapshot) {
-        return get(snapshot, key);
+        if (id && isObject(id)) { return get(id, key); }
+        if (snapshot) { return get(snapshot, key); }
       };
     }
   },
