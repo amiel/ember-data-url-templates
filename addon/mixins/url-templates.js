@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 /* global UriTemplate */
 
-var get = Ember.get;
 var isArray = Ember.isArray;
 var sanitize = encodeURIComponent;
 
@@ -35,7 +34,7 @@ export default Ember.Mixin.create({
 
   // TODO: Add ability to customize templateResolver
   templateResolverFor: function(/* type */) {
-    return Ember.Object.create(get(this, 'urlSegments'));
+    return Ember.Object.create(this.get('urlSegments'));
   },
 
   urlSegments: {
@@ -53,8 +52,9 @@ export default Ember.Mixin.create({
 
     unknownProperty: function(key) {
       return function(type, id, snapshot) {
-        if (id && isObject(id)) { return get(id, key); }
-        if (snapshot) { return get(snapshot, key); }
+        // `id` is an object whet passed by `findQuery`
+        if (id && isObject(id)) { return id[key]; }
+        if (snapshot) { return snapshot[key]; }
       };
     }
   },
