@@ -38,7 +38,7 @@ that are still in canary (1.0.0-beta.17+canary). Namely:
 import DS from "ember-data";
 import UrlTemplates from "ember-data-url-templates";
 
-extend default DS.RESTAdapter(UrlTemplates, {
+export default DS.RESTAdapter.extend(UrlTemplates, {
   findUrlTemplate: '{+host}/comments/{id}',
   urlTemplate: '{+host}/posts/{postId}/comments{/id}'
 });
