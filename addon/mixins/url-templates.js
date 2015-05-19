@@ -8,16 +8,21 @@ var sanitize = encodeURIComponent;
 var isObject = function(object) { return typeof object === 'object'; };
 
 export default Ember.Mixin.create({
-  buildURL: function(type, id, snapshot, requestType) {
+  buildURL: function(type, id, snapshot, requestType, query) {
     var template = this.compileTemplate(this.getTemplate(requestType));
     var templateResolver = this.templateResolverFor(type);
     var adapter = this;
+
+    // HACK: Before emberjs/data@3b4b136d99b519c01008fd89aa3b6ba9a26a3374,
+    // the query params were sent as the id parameter.
+    // This can be removed once we have a version of ember-data to require.
+    if (requestType === 'findQuery' && id && isObject(id)) { query = id; }
 
     return template.fill(function(name) {
       var result = templateResolver.get(name);
 
       if (Ember.typeOf(result) === 'function') {
-        return result.call(adapter, type, id, snapshot);
+        return result.call(adapter, type, id, snapshot, query);
       } else {
         return result;
       }
@@ -46,14 +51,13 @@ export default Ember.Mixin.create({
       if (id && !isArray(id) && !isObject(id)) { return sanitize(id); }
     },
 
-    query: function(type, id) {
-      if (isObject(id)) { return id; }
+    query: function(type, id, snapshot, query) {
+      return query;
     },
 
     unknownProperty: function(key) {
-      return function(type, id, snapshot) {
-        // `id` is an object whet passed by `findQuery`
-        if (id && isObject(id)) { return id[key]; }
+      return function(type, id, snapshot, query) {
+        if (query && query[key]) { return query[key]; }
         if (snapshot) { return snapshot[key]; }
       };
     }

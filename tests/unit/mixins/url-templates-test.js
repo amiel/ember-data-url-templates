@@ -62,22 +62,28 @@ test('it includes the unescaped host from the adapter', function(assert) {
   assert.equal(url, 'http://example.com/api/posts');
 });
 
-test('it can include values from findQuery as {?query*}', function(assert) {
+test('DEPRECATED: it can include values from findQuery as {?query*}', function(assert) {
   var subject = GenericAdapter.create();
-  var url = subject.buildURL('post', { category: 'Uncategorized', date: '2015-11-11' });
+  var url = subject.buildURL('post', { category: 'Uncategorized', date: '2015-11-11' }, null, 'findQuery');
   assert.equal(url, '/posts?category=Uncategorized&date=2015-11-11');
 });
 
-test('it can use real query params', function(assert) {
+test('it can fill real query params', function(assert) {
   var subject = BasicAdapter.create({ urlTemplate: '/posts{?date,category,tag}' });
   var url = subject.buildURL('post', null, { date: '2015-10-10', tag: 'tagged' });
   assert.equal(url, '/posts?date=2015-10-10&tag=tagged');
 });
 
-test('it can use real query params from findQuery', function(assert) {
+test('it can use real query params provided by the new query parameter', function(assert) {
+  var subject = BasicAdapter.create({ urlTemplate: '/posts{?date,category,tag}' });
+  var url = subject.buildURL('post', null, null, 'findQuery', { date: '2015-10-10', tag: 'tagged' });
+  assert.equal(url, '/posts?date=2015-10-10&tag=tagged');
+});
+
+test('DEPRECATED: it can use real query params from findQuery', function(assert) {
   var subject = BasicAdapter.create({ urlTemplate: '/posts{?date,category,tag}' });
   // findQuery passes query params as the `id` argument.
-  var url = subject.buildURL('post', { date: '2015-10-10', tag: 'tagged' });
+  var url = subject.buildURL('post', { date: '2015-10-10', tag: 'tagged' }, null, 'findQuery');
   assert.equal(url, '/posts?date=2015-10-10&tag=tagged');
 });
 
