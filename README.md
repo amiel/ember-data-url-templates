@@ -39,8 +39,21 @@ import DS from "ember-data";
 import UrlTemplates from "ember-data-url-templates";
 
 export default DS.RESTAdapter.extend(UrlTemplates, {
+  urlTemplate: '{+host}/posts/{postId}/comments{/id}',
   findUrlTemplate: '{+host}/comments/{id}',
-  urlTemplate: '{+host}/posts/{postId}/comments{/id}'
+  createRecordUrlTemplate: '{+host}/users/{userId}/comments',
+
+  currentUser: Ember.inject.service(),
+
+  urlSegments: {
+    postId(type, id, snapshot, requestType, query) {
+      return snapshot.belongsTo('post', { id: true });
+    },
+
+    userId() {
+      return this.get('currentUser.id');
+    }
+  }
 });
 ```
 
