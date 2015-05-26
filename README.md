@@ -46,7 +46,7 @@ export default DS.RESTAdapter.extend(UrlTemplates, {
   currentUser: Ember.inject.service(),
 
   urlSegments: {
-    postId(type, id, snapshot, requestType, query) {
+    postId(type, id, snapshot, query) {
       return snapshot.belongsTo('post', { id: true });
     },
 
