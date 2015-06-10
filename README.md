@@ -23,13 +23,7 @@ ember generate ember-data-url-templates
 
 ### Requirements
 
-ember-data-url-templates makes use of a few features in ember-data
-that are still in canary (1.0.0-beta.17+canary). Namely:
-
-* findQuery passes query to `buildURL` (introduced in
-  https://github.com/emberjs/data/commit/ab93c00571d62504cb997d3a7944aa430575856f)
-* Pass requestType to `buildURL` (introduced in
-  https://github.com/emberjs/data/commit/ff35ee78bfac058afb7a715a5dfc5760218cc05c)
+ember-data-url-templates requires ember-data `=> 1.0.0-beta.17`.
 
 ### Synopsis
 
