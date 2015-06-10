@@ -1,6 +1,7 @@
 # ember-data-url-templates
 
 [![Build Status](https://travis-ci.org/amiel/ember-data-url-templates.svg)](https://travis-ci.org/amiel/ember-data-url-templates)
+[![Ember Observer Score](http://emberobserver.com/badges/ember-data-url-templates.svg)](http://emberobserver.com/addons/ember-data-url-templates)
 
 ember-data-url-templates is an addon to allow building urls with url templates instead of
 defining `buildURL` as described in [RFC #4](https://github.com/emberjs/rfcs/pull/4).
