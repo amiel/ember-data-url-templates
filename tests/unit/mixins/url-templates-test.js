@@ -16,6 +16,14 @@ var GenericAdapter = Ember.Object.extend(UrlTemplatesMixin, {
   urlTemplate: '{+host}{/namespace}/{pathForType}{/id}{?query*}'
 });
 
+var OriginalAdapter = Ember.Object.extend({
+  buildURL() {
+    return 'posts-finder';
+  }
+});
+
+var FallbackAdapter = OriginalAdapter.extend(UrlTemplatesMixin);
+
 test('it uses the template', function(assert) {
   var subject = BasicAdapter.create();
   var url = subject.buildURL();
@@ -97,4 +105,10 @@ test('it does not fail for missing values when there is no snapshot', function(a
   var subject = NestedAdapter.create();
   var url = subject.buildURL('comment');
   assert.equal(url, '/posts//comments');
+});
+
+test('it falls back to original buildURL if no template is found for requestType', function(assert) {
+  var subject = FallbackAdapter.create();
+  var url = subject.buildURL();
+  assert.equal(url, 'posts-finder');
 });
