@@ -10,7 +10,13 @@ var isObject = function(object) { return typeof object === 'object'; };
 export default Ember.Mixin.create({
   mergedProperties: ['urlSegments'],
   buildURL: function(type, id, snapshot, requestType, query) {
-    var template = this.compileTemplate(this.getTemplate(requestType));
+    var template = this.getTemplate(requestType);
+
+    if (!template) {
+      return this._super(...arguments);
+    }
+
+    template = this.compileTemplate(template);
     var templateResolver = this.templateResolverFor(type);
     var adapter = this;
 
