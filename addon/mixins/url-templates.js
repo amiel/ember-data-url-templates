@@ -68,11 +68,6 @@ export default Ember.Mixin.create({
         if (snapshot) { return snapshot[key]; }
       };
     }
-  },
-
-  pathForType: function(type) {
-    var camelized = Ember.String.camelize(type);
-    return Ember.String.pluralize(camelized);
   }
 });
 
