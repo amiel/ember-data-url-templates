@@ -4,19 +4,26 @@ import { module, test } from 'qunit';
 
 module('UrlTemplatesMixin');
 
-var BasicAdapter = Ember.Object.extend(UrlTemplatesMixin, {
+var Adapter = Ember.Object.extend({
+  pathForType(type) {
+    var camelized = Ember.String.camelize(type);
+    return Ember.String.pluralize(camelized);
+  }
+});
+
+var BasicAdapter = Adapter.extend(UrlTemplatesMixin, {
   urlTemplate: '/posts{/id}'
 });
 
-var NestedAdapter = Ember.Object.extend(UrlTemplatesMixin, {
+var NestedAdapter = Adapter.extend(UrlTemplatesMixin, {
   urlTemplate: '/posts/{postId}/comments{/id}'
 });
 
-var GenericAdapter = Ember.Object.extend(UrlTemplatesMixin, {
+var GenericAdapter = Adapter.extend(UrlTemplatesMixin, {
   urlTemplate: '{+host}{/namespace}/{pathForType}{/id}{?query*}'
 });
 
-var OriginalAdapter = Ember.Object.extend({
+var OriginalAdapter = Adapter.extend({
   buildURL() {
     return 'posts-finder';
   }
@@ -46,12 +53,6 @@ test('it can use values from the snapshot', function(assert) {
   var subject = NestedAdapter.create();
   var url = subject.buildURL('comment', 5, { postId: 3 });
   assert.equal(url, '/posts/3/comments/5');
-});
-
-test('it pluralizes the type', function(assert) {
-  var subject = GenericAdapter.create();
-  var url = subject.buildURL('post');
-  assert.equal(url, '/posts');
 });
 
 test('it includes the namespace from the adapter', function(assert) {
