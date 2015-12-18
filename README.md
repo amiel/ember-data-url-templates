@@ -25,53 +25,32 @@ ember generate ember-data-url-templates
 
 ember-data-url-templates 0.1 requires ember-data `=> 1.13.0`.
 
+### Documentation
+
+More in depth documentation can be found in [the wiki](https://github.com/amiel/ember-data-url-templates/wiki).
+
 ### Synopsis
 
 ```javascript
 // adapters/comment
 
+import Ember from "ember";
 import DS from "ember-data";
 import UrlTemplates from "ember-data-url-templates";
 
 export default DS.RESTAdapter.extend(UrlTemplates, {
-  urlTemplate: '{+host}/posts/{postId}/comments{/id}',
-  findUrlTemplate: '{+host}/comments/{id}',
+  urlTemplate: '{+host}/comments{/id}',
+  queryUrlTemplate: '{+host}/comments{?query*}',
   createRecordUrlTemplate: '{+host}/users/{userId}/comments',
 
-  currentUser: Ember.inject.service(),
+  session: Ember.inject.service(),
 
   urlSegments: {
-    postId(type, id, snapshot, query) {
-      return snapshot.belongsTo('post', { id: true });
-    },
-
     userId() {
-      return this.get('currentUser.id');
+      return this.get('session.userId');
     }
   }
 });
-```
-
-### `query` and `queryRecord`
-
-The entire query from `query` can be included in the url with `{?query*}`.
-
-```javascript
-// adapter
-queryUrlTemplate: '/posts{?query*}'
-
-store.query('post', { month: 6, year: 2015 });
-// => /posts?month=6&year=2015
-```
-
-Or, selective keys from `query` can be used in the url.
-
-```javascript
-// adapter
-queryUrlTemplate: '/blog/{category}{/year}{/month}'
-
-store.query('post', { category: 'featured', year: 2015 });
-// => /blog/featured/2015
 ```
 
 ## Contributing
