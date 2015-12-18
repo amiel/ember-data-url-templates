@@ -7,7 +7,7 @@ ember-data-url-templates is an addon to allow building urls with url templates i
 defining `buildURL` as described in [RFC #4](https://github.com/emberjs/rfcs/pull/4).
 
 ember-data-url-templates is under early development. Feedback is welcome, and of course,
-so are pull-requests.
+so are pull requests.
 
 Url templates are compiled with [geraintluff/uri-templates](https://github.com/geraintluff/uri-templates),
 which fully implements [RFC 6570](http://tools.ietf.org/html/rfc6570).
@@ -23,7 +23,7 @@ ember generate ember-data-url-templates
 
 ### Requirements
 
-ember-data-url-templates requires ember-data `=> 1.0.0-beta.17`.
+ember-data-url-templates 0.1 requires ember-data `=> 1.13.0`.
 
 ### Synopsis
 
@@ -52,18 +52,26 @@ export default DS.RESTAdapter.extend(UrlTemplates, {
 });
 ```
 
-### findQuery
+### `query` and `queryRecord`
 
-The entire query from `findQuery` can be included in the url with `{?query*}`.
+The entire query from `query` can be included in the url with `{?query*}`.
 
 ```javascript
-findQueryUrlTemplate: '/posts{?query*}'
+// adapter
+queryUrlTemplate: '/posts{?query*}'
+
+store.query('post', { month: 6, year: 2015 });
+// => /posts?month=6&year=2015
 ```
 
-Or, selective keys from `findQuery` can be used in the url.
+Or, selective keys from `query` can be used in the url.
 
 ```javascript
-findQueryUrlTemplate: '/blog/{category}{/year,month}'
+// adapter
+queryUrlTemplate: '/blog/{category}{/year}{/month}'
+
+store.query('post', { category: 'featured', year: 2015 });
+// => /blog/featured/2015
 ```
 
 ## Contributing
