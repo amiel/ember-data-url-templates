@@ -23,6 +23,19 @@ var GenericAdapter = Adapter.extend(UrlTemplatesMixin, {
   urlTemplate: '{+host}{/namespace}/{pathForType}{/id}{?query*}'
 });
 
+var SegmentAdapter = Adapter.extend(UrlTemplatesMixin, {
+  urlTemplate: '/users/{userId}/posts{/category}',
+  sessionId: 123,
+
+  urlSegments: {
+    // normally this would be a
+    userId: function() { return this.get('sessionId'); },
+    category: function(type, id, snapshot, query) {
+      if (query && query.featured) { return 'featured'; }
+    },
+  },
+});
+
 var OriginalAdapter = Adapter.extend({
   buildURL() {
     return 'posts-finder';
@@ -93,6 +106,18 @@ test('it does not fail for missing values when there is no snapshot', function(a
   var subject = NestedAdapter.create();
   var url = subject.buildURL('comment');
   assert.equal(url, '/posts//comments');
+});
+
+test('it uses urlSegments', function(assert) {
+  var subject = SegmentAdapter.create();
+  var url = subject.buildURL('post');
+  assert.equal(url, '/users/123/posts');
+});
+
+test('it calls urlSegments with the query', function(assert) {
+  var subject = SegmentAdapter.create();
+  var url = subject.buildURL('post', null, null, 'find', { featured: true });
+  assert.equal(url, '/users/123/posts/featured');
 });
 
 test('it falls back to original buildURL if no template is found for requestType', function(assert) {
