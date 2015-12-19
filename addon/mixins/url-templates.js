@@ -20,11 +20,6 @@ export default Ember.Mixin.create({
     var templateResolver = this.templateResolverFor(type);
     var adapter = this;
 
-    // HACK: Before emberjs/data@3b4b136d99b519c01008fd89aa3b6ba9a26a3374,
-    // the query params were sent as the id parameter.
-    // This can be removed once we have a version of ember-data to require.
-    if (requestType === 'findQuery' && id && isObject(id)) { query = id; }
-
     return template.fill(function(name) {
       var result = templateResolver.get(name);
 

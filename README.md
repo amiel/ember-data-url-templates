@@ -7,7 +7,7 @@ ember-data-url-templates is an addon to allow building urls with url templates i
 defining `buildURL` as described in [RFC #4](https://github.com/emberjs/rfcs/pull/4).
 
 ember-data-url-templates is under early development. Feedback is welcome, and of course,
-so are pull-requests.
+so are pull requests.
 
 Url templates are compiled with [geraintluff/uri-templates](https://github.com/geraintluff/uri-templates),
 which fully implements [RFC 6570](http://tools.ietf.org/html/rfc6570).
@@ -18,52 +18,38 @@ which fully implements [RFC 6570](http://tools.ietf.org/html/rfc6570).
 
 ```shell
 ember install ember-data-url-templates
-ember generate ember-data-url-templates
 ```
 
 ### Requirements
 
-ember-data-url-templates requires ember-data `=> 1.0.0-beta.17`.
+ember-data-url-templates `0.1.0` is known to work with ember-data `>= 1.0.0-beta.18`, `^1.13`, and `^2.0`.
+
+### Documentation
+
+More in depth documentation can be found in [the wiki](https://github.com/amiel/ember-data-url-templates/wiki).
 
 ### Synopsis
 
 ```javascript
 // adapters/comment
 
+import Ember from "ember";
 import DS from "ember-data";
 import UrlTemplates from "ember-data-url-templates";
 
 export default DS.RESTAdapter.extend(UrlTemplates, {
-  urlTemplate: '{+host}/posts/{postId}/comments{/id}',
-  findUrlTemplate: '{+host}/comments/{id}',
+  urlTemplate: '{+host}/comments{/id}',
+  queryUrlTemplate: '{+host}/comments{?query*}',
   createRecordUrlTemplate: '{+host}/users/{userId}/comments',
 
-  currentUser: Ember.inject.service(),
+  session: Ember.inject.service(),
 
   urlSegments: {
-    postId(type, id, snapshot, query) {
-      return snapshot.belongsTo('post', { id: true });
-    },
-
     userId() {
-      return this.get('currentUser.id');
+      return this.get('session.userId');
     }
   }
 });
-```
-
-### findQuery
-
-The entire query from `findQuery` can be included in the url with `{?query*}`.
-
-```javascript
-findQueryUrlTemplate: '/posts{?query*}'
-```
-
-Or, selective keys from `findQuery` can be used in the url.
-
-```javascript
-findQueryUrlTemplate: '/blog/{category}{/year,month}'
 ```
 
 ## Contributing

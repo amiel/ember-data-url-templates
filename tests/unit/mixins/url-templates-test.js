@@ -23,6 +23,19 @@ var GenericAdapter = Adapter.extend(UrlTemplatesMixin, {
   urlTemplate: '{+host}{/namespace}/{pathForType}{/id}{?query*}'
 });
 
+var SegmentAdapter = Adapter.extend(UrlTemplatesMixin, {
+  urlTemplate: '/users/{userId}/posts{/category}',
+  sessionId: 123,
+
+  urlSegments: {
+    // normally this would be a
+    userId: function() { return this.get('sessionId'); },
+    category: function(type, id, snapshot, query) {
+      if (query && query.featured) { return 'featured'; }
+    },
+  },
+});
+
 var OriginalAdapter = Adapter.extend({
   buildURL() {
     return 'posts-finder';
@@ -71,12 +84,6 @@ test('it includes the unescaped host from the adapter', function(assert) {
   assert.equal(url, 'http://example.com/api/posts');
 });
 
-test('DEPRECATED: it can include values from findQuery as {?query*}', function(assert) {
-  var subject = GenericAdapter.create();
-  var url = subject.buildURL('post', { category: 'Uncategorized', date: '2015-11-11' }, null, 'findQuery');
-  assert.equal(url, '/posts?category=Uncategorized&date=2015-11-11');
-});
-
 test('it can fill real query params', function(assert) {
   var subject = BasicAdapter.create({ urlTemplate: '/posts{?date,category,tag}' });
   var url = subject.buildURL('post', null, { date: '2015-10-10', tag: 'tagged' });
@@ -85,14 +92,7 @@ test('it can fill real query params', function(assert) {
 
 test('it can use real query params provided by the new query parameter', function(assert) {
   var subject = BasicAdapter.create({ urlTemplate: '/posts{?date,category,tag}' });
-  var url = subject.buildURL('post', null, null, 'findQuery', { date: '2015-10-10', tag: 'tagged' });
-  assert.equal(url, '/posts?date=2015-10-10&tag=tagged');
-});
-
-test('DEPRECATED: it can use real query params from findQuery', function(assert) {
-  var subject = BasicAdapter.create({ urlTemplate: '/posts{?date,category,tag}' });
-  // findQuery passes query params as the `id` argument.
-  var url = subject.buildURL('post', { date: '2015-10-10', tag: 'tagged' }, null, 'findQuery');
+  var url = subject.buildURL('post', null, null, 'query', { date: '2015-10-10', tag: 'tagged' });
   assert.equal(url, '/posts?date=2015-10-10&tag=tagged');
 });
 
@@ -106,6 +106,18 @@ test('it does not fail for missing values when there is no snapshot', function(a
   var subject = NestedAdapter.create();
   var url = subject.buildURL('comment');
   assert.equal(url, '/posts//comments');
+});
+
+test('it uses urlSegments', function(assert) {
+  var subject = SegmentAdapter.create();
+  var url = subject.buildURL('post');
+  assert.equal(url, '/users/123/posts');
+});
+
+test('it calls urlSegments with the query', function(assert) {
+  var subject = SegmentAdapter.create();
+  var url = subject.buildURL('post', null, null, 'find', { featured: true });
+  assert.equal(url, '/users/123/posts/featured');
 });
 
 test('it falls back to original buildURL if no template is found for requestType', function(assert) {
