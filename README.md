@@ -18,12 +18,11 @@ which fully implements [RFC 6570](http://tools.ietf.org/html/rfc6570).
 
 ```shell
 ember install ember-data-url-templates
-ember generate ember-data-url-templates
 ```
 
 ### Requirements
 
-ember-data-url-templates 0.1 requires ember-data `=> 1.13.0`.
+ember-data-url-templates `0.1.0` is known to work with ember-data `>= 1.0.0-beta.18`, `^1.13`, and `^2.0`.
 
 ### Documentation
 
