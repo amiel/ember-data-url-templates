@@ -40,6 +40,7 @@ export default Ember.Mixin.create({
   },
 
   // TODO: Add ability to customize templateResolver
+  // TODO: Add reference to the adapter
   templateResolverFor: function(/* type */) {
     return Ember.Object.create(this.get('urlSegments'));
   },
@@ -57,6 +58,7 @@ export default Ember.Mixin.create({
       return query;
     },
 
+    // TODO: Support automatic relationship ids through snapshots api.
     unknownProperty: function(key) {
       return function(type, id, snapshot, query) {
         if (query && query[key]) { return query[key]; }
