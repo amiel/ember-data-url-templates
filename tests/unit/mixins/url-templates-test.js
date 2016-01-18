@@ -62,6 +62,12 @@ test('it escapes basic values', function(assert) {
   assert.equal(url, '/bar%20baz');
 });
 
+test('it escapes the id', function(assert) {
+  var subject = BasicAdapter.create();
+  var url = subject.buildURL('post', 'abc xyz');
+  assert.equal(url, '/posts/abc%20xyz');
+});
+
 test('it can use values from the snapshot', function(assert) {
   var subject = NestedAdapter.create();
   var url = subject.buildURL('comment', 5, { postId: 3 });

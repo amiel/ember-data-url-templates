@@ -3,7 +3,6 @@ import Ember from 'ember';
 /* global UriTemplate */
 
 var isArray = Ember.isArray;
-var sanitize = encodeURIComponent;
 
 var isObject = function(object) { return typeof object === 'object'; };
 
@@ -51,7 +50,7 @@ export default Ember.Mixin.create({
     pathForType: function(type) { return this.pathForType(type); },
 
     id: function(type, id) {
-      if (id && !isArray(id) && !isObject(id)) { return sanitize(id); }
+      if (id && !isArray(id) && !isObject(id)) { return id; }
     },
 
     query: function(type, id, snapshot, query) {
@@ -67,4 +66,3 @@ export default Ember.Mixin.create({
     }
   }
 });
-
