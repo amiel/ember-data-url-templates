@@ -44,6 +44,14 @@ export default Ember.Mixin.create({
     return Ember.Object.create(this.get('urlSegments'));
   },
 
+  // HACK: Prevent query/queryRecord from appending query params to urls, we
+  // can do that in the template.
+  // TODO: Use dataForRequest when ds-improved-ajax lands
+  // (https://github.com/emberjs/data/pull/3099)
+  sortQueryParams: function(/* params */) {
+    return {};
+  },
+
   urlSegments: {
     host: function () { return this.get('host'); },
     namespace: function() { return this.get('namespace'); },
