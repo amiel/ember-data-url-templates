@@ -62,7 +62,14 @@ export default Ember.Mixin.create({
     },
 
     query: function(type, id, snapshot, query) {
-      return query;
+      var newQuery = Ember.copy(query);
+
+      for (var param in newQuery) {
+        if (newQuery[param] === undefined) { delete newQuery[param]; }
+        if (newQuery[param] === null ) { newQuery[param] = ""; }
+      }
+
+      return newQuery;
     },
 
     // TODO: Support automatic relationship ids through snapshots api.

@@ -131,3 +131,29 @@ test('it falls back to original buildURL if no template is found for requestType
   var url = subject.buildURL();
   assert.equal(url, 'posts-finder');
 });
+
+test('it deletes undefined query parameter', function(assert) {
+  var subject = BasicAdapter.create({ urlTemplate: '/posts{?query*}' });
+  var url = subject.buildURL('post', null, null, 'query', { tag: undefined });
+  assert.equal(url, '/posts');
+});
+
+test('it clears null query parameter', function(assert) {
+  var subject = BasicAdapter.create({ urlTemplate: '/posts{?query*}' });
+  var url = subject.buildURL('post', null, null, 'query', { tag: null });
+  assert.equal(url, '/posts?tag=');
+});
+
+test('it does not mutate undefined query param', function(assert) {
+  var subject = BasicAdapter.create({ urlTemplate: '/posts{?query*}' });
+  var params = { tag: undefined };
+  subject.buildURL('post', null, null, 'query', params);
+  assert.ok('tag' in params);
+});
+
+test('it does not mutate null query param', function(assert) {
+  var subject = BasicAdapter.create({ urlTemplate: '/posts{?query*}' });
+  var params = { tag: null };
+  subject.buildURL('post', null, null, 'query', params);
+  assert.equal(params.tag, null);
+});
