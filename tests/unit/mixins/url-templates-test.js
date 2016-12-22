@@ -80,14 +80,14 @@ test('it includes the namespace from the adapter', function(assert) {
   assert.equal(url, '/api/posts');
 });
 
-test('it includes the unescaped host from the adapter', function(assert) {
+test('it includes the unescaped host and namespace from the adapter', function(assert) {
   var subject = GenericAdapter.create({
     host: 'http://example.com',
-    namespace: 'api'
+    namespace: 'api/v1'
   });
 
   var url = subject.buildURL('post');
-  assert.equal(url, 'http://example.com/api/posts');
+  assert.equal(url, 'http://example.com/api/v1/posts');
 });
 
 test('it can fill real query params', function(assert) {
