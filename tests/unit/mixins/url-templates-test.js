@@ -6,8 +6,7 @@ module('UrlTemplatesMixin');
 
 var Adapter = Ember.Object.extend({
   pathForType(type) {
-    var camelized = Ember.String.camelize(type);
-    return Ember.String.pluralize(camelized);
+    return Ember.String.camelize(type) + 's';
   }
 });
 
