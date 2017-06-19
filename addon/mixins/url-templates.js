@@ -1,6 +1,5 @@
 import Ember from 'ember';
-
-/* global UriTemplate */
+import UriTemplate from 'uri-templates';
 
 var isArray = Ember.isArray;
 
