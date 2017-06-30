@@ -1,3 +1,4 @@
-import comment from 'ember-data-url-templates/models/comment';
+import DS from 'ember-data';
 
-export default comment;
+export default DS.Model.extend({
+});
