@@ -29,7 +29,7 @@ before_install:
   - phantomjs --version
 
 install:
-  - npm install
+  - yarn install
 
 script:
   # Usually, it's ok to finish the test scenario without reverting
