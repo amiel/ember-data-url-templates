@@ -3,7 +3,7 @@
 <div id="posts">
   {{#each model as |post|}}
     <div id="post-{{post.id}}" class="post">
-      {{post.title}}
+      {{#link-to 'post' post.slug}}{{post.title}}{{/link-to}}
     </div>
   {{/each}}
 </div>

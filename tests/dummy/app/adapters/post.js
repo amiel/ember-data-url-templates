@@ -1,6 +1,7 @@
 import ApplicationAdapter from './application';
 
 export default ApplicationAdapter.extend({
-  urlTemplate: "{+host}{/namespace}/my-posts{/id}",
+  urlTemplate: "{+host}{/namespace}/my-posts",
+  queryRecordUrlTemplate: "{+host}{/namespace}/my-posts/{slug}",
   namespace: 'api',
 });

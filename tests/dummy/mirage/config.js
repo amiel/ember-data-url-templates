@@ -1,6 +1,9 @@
 export default function() {
 
   this.get('/api/my-posts', 'post');
+  this.get('/api/my-posts/:slug', (schema, request) => {
+    return schema.posts.findBy({ slug: request.params.slug });
+  });
 
   // These comments are here to help you get started. Feel free to delete them.
 

@@ -3,7 +3,7 @@ import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 
 moduleForAcceptance('Acceptance | basic url template test');
 
-test('visiting /posts', function(assert) {
+test('it can use a simple custom url', function(assert) {
   server.createList('post', 5);
 
   visit('/posts');
@@ -12,3 +12,17 @@ test('visiting /posts', function(assert) {
     assert.equal(find('#posts .post').length, '5');
   });
 });
+
+test('it can use a specific template for one type of call (queryRecord)', function(assert) {
+  server.create('post', {
+    slug: 'my-first-post',
+    title: 'This is my first post',
+  });
+
+  visit('/posts/my-first-post');
+
+  andThen(() => {
+    assert.equal(find('.post h2').text(), 'This is my first post');
+  });
+});
+
