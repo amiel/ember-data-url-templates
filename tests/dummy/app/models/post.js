@@ -1,3 +1,7 @@
-import post from 'dummy/models/post';
+import DS from 'ember-data';
 
-export default post;
+const { attr } = DS;
+
+export default DS.Model.extend({
+  title: attr('string'),
+});

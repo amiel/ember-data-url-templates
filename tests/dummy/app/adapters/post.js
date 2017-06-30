@@ -1,7 +1,6 @@
-import DS from "ember-data";
-import UrlTemplates from "ember-data-url-templates";
+import ApplicationAdapter from './application';
 
-export default DS.RESTAdapter.extend(UrlTemplates, {
-  urlTemplate: "{+host}{/namespace}/my-post{/id}",
-  namespace: 'api'
+export default ApplicationAdapter.extend({
+  urlTemplate: "{+host}{/namespace}/my-posts{/id}",
+  namespace: 'api',
 });
