@@ -73,7 +73,13 @@ export default Ember.Mixin.create({
     unknownProperty(key) {
       return (type, id, snapshot, query) => {
         if (query && query[key]) { return query[key]; }
-        if (snapshot) { return snapshot[key]; }
+        if (snapshot) {
+          if (snapshot[key]) {
+            return snapshot[key];
+          } else if (snapshot.attr) {
+            return snapshot.attr(key);
+          }
+        }
       };
     }
   }

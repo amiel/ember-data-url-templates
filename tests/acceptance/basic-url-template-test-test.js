@@ -26,3 +26,20 @@ test('it can use a specific template for one type of call (queryRecord)', functi
   });
 });
 
+test('it can use an attribute from the snapshot when generating a url', function(assert) {
+  server.create('post', {
+    slug: 'my-first-post',
+    title: 'This is my first post',
+  });
+
+  visit('/posts/my-first-post');
+
+  click('#publish-post');
+
+  visit('/posts/my-first-post');
+
+  andThen(() => {
+    assert.equal(find('#publish-post').length, 0);
+  });
+});
+

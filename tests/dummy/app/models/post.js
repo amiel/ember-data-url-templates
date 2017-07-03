@@ -5,4 +5,5 @@ const { attr } = DS;
 export default DS.Model.extend({
   slug: attr('string'),
   title: attr('string'),
+  isPublished: attr('boolean'),
 });
