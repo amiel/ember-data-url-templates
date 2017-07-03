@@ -1,6 +1,18 @@
 export default function() {
 
   this.get('/api/my-posts', 'post');
+  this.get('/api/my-posts/:slug', (schema, request) => {
+    return schema.posts.findBy({ slug: request.params.slug });
+  });
+
+  this.patch('/api/my-posts/:slug', (schema, request) => {
+    let post = schema.posts.findBy({ slug: request.params.slug });
+
+    // We could actually update the post, but YAGNI? *shrug*
+    return post;
+  });
+
+  this.get('/api/posts/:post_id/comments/:id');
 
   // These comments are here to help you get started. Feel free to delete them.
 
