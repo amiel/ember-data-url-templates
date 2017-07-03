@@ -3,6 +3,8 @@ import UriTemplate from 'uri-templates';
 
 const { isArray, copy, typeOf } = Ember;
 
+const ID_KEY_RE = /(_id|Id)$/;
+
 export default Ember.Mixin.create({
   mergedProperties: ['urlSegments'],
   buildURL(type, id, snapshot, requestType, query) {
@@ -76,6 +78,8 @@ export default Ember.Mixin.create({
         if (snapshot) {
           if (snapshot[key]) {
             return snapshot[key];
+          } else if (isIdKey(key) && snapshot.belongsTo) {
+            return snapshot.belongsTo(relationshipNameForKey(key), { id: true });
           } else if (snapshot.attr) {
             return snapshot.attr(key);
           }
@@ -87,4 +91,12 @@ export default Ember.Mixin.create({
 
 function isObject(object) {
   return typeof object === 'object';
+}
+
+function relationshipNameForKey(key) {
+  return key.replace(ID_KEY_RE, '');
+}
+
+function isIdKey(key) {
+  return ID_KEY_RE.test(key);
 }

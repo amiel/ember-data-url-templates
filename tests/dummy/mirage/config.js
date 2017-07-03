@@ -12,6 +12,8 @@ export default function() {
     return post;
   });
 
+  this.get('/api/posts/:post_id/comments/:id');
+
   // These comments are here to help you get started. Feel free to delete them.
 
   /*
