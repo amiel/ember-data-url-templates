@@ -1,0 +1,56 @@
+{
+  "name": "ember-data-url-templates",
+  "version": "0.3.0",
+  "description": "An ember-addon to allow building urls with url templates instead of defining buildURL.",
+  "keywords": [
+    "ember-addon"
+  ],
+  "license": "MIT",
+  "author": "amiel@actionsprout.com",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "repository": "https://github.com/amiel/ember-data-url-templates",
+  "scripts": {
+    "build": "ember build",
+    "start": "ember server",
+    "test": "ember try:each"
+  },
+  "dependencies": {
+    "ember-cli-babel": "^6.0.0",
+    "ember-cli-uri-templates-shim": "^0.0.1"
+  },
+  "devDependencies": {
+    "broccoli-asset-rev": "^2.4.5",
+    "ember-ajax": "^3.0.0",
+    "ember-cli": "2.13.2",
+    "ember-cli-dependency-checker": "^1.3.0",
+    "ember-cli-deploy": "^1.0.1",
+    "ember-cli-deploy-build": "^1.1.0",
+    "ember-cli-deploy-git": "^1.1.1",
+    "ember-cli-eslint": "^3.0.0",
+    "ember-cli-htmlbars": "^1.1.1",
+    "ember-cli-htmlbars-inline-precompile": "^0.4.0",
+    "ember-cli-inject-live-reload": "^1.4.1",
+    "ember-cli-mirage": "^0.3.3",
+    "ember-cli-qunit": "^4.0.0",
+    "ember-cli-shims": "^1.1.0",
+    "ember-cli-sri": "^2.1.0",
+    "ember-cli-uglify": "^1.2.0",
+    "ember-data": "^2.14.3",
+    "ember-disable-prototype-extensions": "^1.1.0",
+    "ember-export-application-global": "^2.0.0",
+    "ember-load-initializers": "^1.0.0",
+    "ember-resolver": "^4.0.0",
+    "ember-source": "~2.13.0",
+    "ember-welcome-page": "^3.0.0",
+    "loader.js": "^4.2.3"
+  },
+  "engines": {
+    "node": ">= 4"
+  },
+  "ember-addon": {
+    "configPath": "tests/dummy/config"
+  }
+}
