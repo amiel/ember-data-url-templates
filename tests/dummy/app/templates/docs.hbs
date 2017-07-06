@@ -1,0 +1,24 @@
+{{#docs-viewer as |viewer|}}
+
+  {{#viewer.nav as |nav|}}
+    {{nav.item 'Home' 'docs.index'}}
+    {{nav.item 'Quickstart' 'docs.quickstart'}}
+    {{nav.item 'Patterns' 'docs.patterns'}}
+
+    {{#nav.subnav as |nav|}}
+      {{nav.item 'query and queryRecord' 'docs.cookbook.queries'}}
+      {{nav.item 'relationships' 'docs.cookbook.relationships'}}
+    {{/nav.subnav}}
+
+    <!-- {{nav.item 'API Reference' 'docs.api'}} -->
+  {{/viewer.nav}}
+
+  {{#viewer.main}}
+    <div class="docs-container docs__center docs-md">
+      <div class="docs-section">
+        {{outlet}}
+      </div>
+    </div>
+  {{/viewer.main}}
+
+{{/docs-viewer}}
