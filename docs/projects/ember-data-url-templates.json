@@ -1,0 +1,17 @@
+{
+  "data": {
+    "type": "project",
+    "id": "ember-data-url-templates",
+    "attributes": {},
+    "relationships": {
+      "project-versions": {
+        "data": [
+          {
+            "type": "project-version",
+            "id": "ember-data-url-templates-0.3.1+9ffbf6af"
+          }
+        ]
+      }
+    }
+  }
+}
