@@ -7,4 +7,5 @@ export default DS.Model.extend({
   title: attr('string'),
   isPublished: attr('boolean'),
   comments: hasMany(),
+  reactions: hasMany('reactions', { urlTemplate: 'reactions' }),
 });

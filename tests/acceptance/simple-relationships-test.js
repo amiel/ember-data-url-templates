@@ -7,7 +7,12 @@ const { get } = Ember;
 moduleForAcceptance('Acceptance | simple relationships', {
   beforeEach() {
     this.post = server.create('post');
+
     this.comment = server.create('comment', {
+      post: this.post,
+    });
+
+    server.createList('reaction', 4, {
       post: this.post,
     });
 
@@ -16,8 +21,11 @@ moduleForAcceptance('Acceptance | simple relationships', {
 });
 
 test('it can use a belongsTo id from the snapshot when generating a url', function(assert) {
-  andThen(() => {
-    assert.equal(find('#comments p').length, 1);
-  });
+  // Comments are loaded with data and ids
+  assert.equal(find('#comments p').length, 1);
+});
+
+test('it can load a relationship from just a url template', function(assert) {
+  assert.equal(find('#reactions p').length, 4);
 });
 
