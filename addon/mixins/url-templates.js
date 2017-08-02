@@ -35,6 +35,12 @@ export default Ember.Mixin.create({
     return this._super(store, snapshot, url, relationship);
   },
 
+  // TODO: Do not change anything if this is not a urlTemplate
+  findBelongsTo(store, snapshot, urlTemplate) {
+    const url = this.buildURL(null, snapshot.id, snapshot, urlTemplate, {});
+    return this._super(store, snapshot, url);
+  },
+
   getTemplate(requestType) {
     return this.get(requestType + 'UrlTemplate') || this.get('urlTemplate');
   },

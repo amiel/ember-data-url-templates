@@ -6,7 +6,11 @@ const { get } = Ember;
 
 moduleForAcceptance('Acceptance | simple relationships', {
   beforeEach() {
-    this.post = server.create('post');
+    this.author = server.create('author');
+
+    this.post = server.create('post', {
+      author: this.author,
+    });
 
     this.comment = server.create('comment', {
       post: this.post,
@@ -25,7 +29,11 @@ test('it can use a belongsTo id from the snapshot when generating a url', functi
   assert.equal(find('#comments p').length, 1);
 });
 
-test('it can load a relationship from just a url template', function(assert) {
+test('it can load a hasMany relationship from just a url template', function(assert) {
   assert.equal(find('#reactions p').length, 4);
+});
+
+test('it can load a belongsTo relationship from just a url template', function(assert) {
+  assert.equal(find('#author').text(), `by ${this.author.name}`);
 });
 

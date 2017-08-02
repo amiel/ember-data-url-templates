@@ -1,6 +1,8 @@
 <div id="post-{{post.id}}" class="post">
   <h2>{{post.title}}</h2>
 
+  <p id="author">by {{post.author.name}}</p>
+
   {{#unless post.isPublished}}
     <a id="publish-post" {{action 'publishPost' post}}>Publish Post</a>
   {{/unless}}

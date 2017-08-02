@@ -10,6 +10,7 @@ export default Ember.Route.extend({
 
   afterModel(model) {
     return RSVP.hash({
+      author: get(model, 'author'),
       comments: get(model, 'comments'),
       reactions: get(model, 'reactions'),
     });
