@@ -24,24 +24,24 @@ moduleForAcceptance('Acceptance | simple relationships', {
   },
 });
 
+// The comments relationship comes with with data and ids. Therefore it uses
+// the findRecord adapter hook in the comment adapter and the comment adapter
+// urlTemplate.
 test('it can use a belongsTo id from the snapshot when generating a url', function(assert) {
-  // The comments relationship comes with with data and ids. Therefore it uses
-  // the findRecord adapter hook in the comment adapter and the comment adapter
-  // urlTemplate.
   assert.equal(find('#comments p').length, 1);
 });
 
+// The reactions relationshp is configured in the post model to use the
+// urlTemplate. It therefore uses the findMany hook in the post adapter and
+// the post adapter reactionsUrlTemplate.
 test('it can load a hasMany relationship from just a url template', function(assert) {
-  // The reactions relationshp is configured in the post model to use the
-  // urlTemplate. It therefore uses the findMany hook in the post adapter and
-  // the post adapter reactionsUrlTemplate.
   assert.equal(find('#reactions p').length, 4);
 });
 
+// The author relationshp is configured in the post model to use the
+// urlTemplate. It therefore uses the findBelongsTo hook in the post adapter
+// and the post adapter authorUrlTemplate.
 test('it can load a belongsTo relationship from just a url template', function(assert) {
-  // The reactions relationshp is configured in the post model to use the
-  // urlTemplate. It therefore uses the findBelongsTo hook in the post adapter and
-  // the post adapter authorUrlTemplate.
   assert.equal(find('#author').text(), `by ${this.author.name}`);
 });
 
