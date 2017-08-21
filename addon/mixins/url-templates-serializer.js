@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 const { get } = Ember;
 
+export const LINK_PREFIX = 'urlTemplate:';
+
 export default Ember.Mixin.create({
   normalize(modelClass) {
     let result = this._super(...arguments);
@@ -29,6 +31,6 @@ function _templateName(setting, name) {
 
 function _injectLinkForRelationship(result, name, link) {
   if (link) {
-    result.data.relationships[name] = { links: { related: link } };
+    result.data.relationships[name] = { links: { related: LINK_PREFIX + link } };
   }
 }

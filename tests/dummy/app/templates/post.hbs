@@ -21,4 +21,10 @@
       <p>{{comment.message}}</p>
     {{/each}}
   </div>
+
+  <div id="related-posts">
+    {{#each post.relatedPosts as |post|}}
+      <p>{{#link-to 'post' post}}{{post.title}}{{/link-to}}</p>
+    {{/each}}
+  </div>
 </div>

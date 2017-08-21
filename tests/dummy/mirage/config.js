@@ -20,4 +20,9 @@ export default function() {
     let post = schema.posts.find(request.params.post_id);
     return post.author;
   });
+
+  this.get('/posts/:post_id/related-posts', (schema, request) => {
+    let post = schema.posts.find(request.params.post_id);
+    return post.relatedPosts;
+  });
 }

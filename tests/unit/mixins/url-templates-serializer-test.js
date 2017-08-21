@@ -47,7 +47,7 @@ test('it adds the link for a relationship that is configured with urlTemplate', 
   const reactionRelationship = get(result, 'data.relationships.reactions');
 
   assert.deepEqual(reactionRelationship, {
-    links: { related: 'theReactions' },
+    links: { related: 'urlTemplate:theReactions' },
   });
 });
 
@@ -63,7 +63,7 @@ test('it adds a link with the name of the relationship when true', function(asse
   const authorRelationship = get(result, 'data.relationships.author');
 
   assert.deepEqual(authorRelationship, {
-    links: { related: 'author' },
+    links: { related: 'urlTemplate:author' },
   });
 });
 

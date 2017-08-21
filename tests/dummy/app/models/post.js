@@ -10,4 +10,5 @@ export default DS.Model.extend({
   author: belongsTo('author', { urlTemplate: 'author' }),
   comments: hasMany(),
   reactions: hasMany('reactions', { urlTemplate: 'reactions' }),
+  relatedPosts: hasMany('posts'),
 });

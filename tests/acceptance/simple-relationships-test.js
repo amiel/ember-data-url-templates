@@ -8,8 +8,11 @@ moduleForAcceptance('Acceptance | simple relationships', {
   beforeEach() {
     this.author = server.create('author');
 
+    this.relatedPosts = server.createList('post', 2);
+
     this.post = server.create('post', {
       author: this.author,
+      relatedPosts: this.relatedPosts,
     });
 
     this.comment = server.create('comment', {
@@ -43,5 +46,12 @@ test('it can load a hasMany relationship from just a url template', function(ass
 // and the post adapter authorUrlTemplate.
 test('it can load a belongsTo relationship from just a url template', function(assert) {
   assert.equal(find('#author').text(), `by ${this.author.name}`);
+});
+
+// The relatedPosts relationship comes with links, and is a case to verify
+// that including urlTemplates does not cause a regression in the default
+// functionality for links.
+test('it can load related posts through the normal links method', function(assert) {
+  assert.equal(find('#related-posts p').length, 2);
 });
 
