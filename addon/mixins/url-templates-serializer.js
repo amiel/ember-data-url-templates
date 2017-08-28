@@ -22,15 +22,15 @@ function _injectLinksForRelationships(modelClass, result) {
 
 function _templateName(setting, name) {
   if (setting && typeof setting === 'boolean') {
-    return name
+    return name;
   } else {
     return setting;
   }
 }
 
 
-function _injectLinkForRelationship(result, name, link) {
-  if (link) {
-    result.data.relationships[name] = { links: { related: LINK_PREFIX + link } };
+function _injectLinkForRelationship(result, name, urlTemplateOption) {
+  if (urlTemplateOption) {
+    result.data.relationships[name] = { links: { related: LINK_PREFIX + urlTemplateOption } };
   }
 }
