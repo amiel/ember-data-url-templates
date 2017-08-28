@@ -14,6 +14,7 @@ export default function() {
     return post;
   });
 
+  this.get('/posts/:id');
   this.get('/posts/:post_id/comments/:id');
   this.get('/posts/:post_id/reactions');
   this.get('/posts/:post_id/author', (schema, request) => {
