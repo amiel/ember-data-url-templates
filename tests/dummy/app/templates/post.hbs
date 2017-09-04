@@ -1,15 +1,30 @@
 <div id="post-{{post.id}}" class="post">
   <h2>{{post.title}}</h2>
 
+  <p id="author">by {{post.author.name}}</p>
+
   {{#unless post.isPublished}}
     <a id="publish-post" {{action 'publishPost' post}}>Publish Post</a>
   {{/unless}}
 
   <h3>Comments</h3>
 
+  <div id="reactions">
+    {{#each post.reactions as |reaction|}}
+      <p>{{reaction.verb}} by {{reaction.name}}</p>
+    {{/each}}
+  </div>
+
+
   <div id="comments">
     {{#each post.comments as |comment|}}
       <p>{{comment.message}}</p>
+    {{/each}}
+  </div>
+
+  <div id="related-posts">
+    {{#each post.relatedPosts as |post|}}
+      <p>{{#link-to 'post' post}}{{post.title}}{{/link-to}}</p>
     {{/each}}
   </div>
 </div>

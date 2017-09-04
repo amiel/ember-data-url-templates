@@ -1,9 +1,11 @@
 import Ember from 'ember';
 import UriTemplate from 'uri-templates';
+import { LINK_PREFIX } from "ember-data-url-templates/mixins/url-templates-serializer";
 
 const { isArray, copy, typeOf } = Ember;
 
 const ID_KEY_RE = /(_id|Id)$/;
+const LINK_PREFIX_RE = new RegExp(`^${LINK_PREFIX}`);
 
 export default Ember.Mixin.create({
   mergedProperties: ['urlSegments'],
@@ -29,6 +31,16 @@ export default Ember.Mixin.create({
     });
   },
 
+  findHasMany(store, snapshot, link, relationship) {
+    const url = this._urlFromLink(snapshot, link);
+    return this._super(store, snapshot, url, relationship);
+  },
+
+  findBelongsTo(store, snapshot, link) {
+    const url = this._urlFromLink(snapshot, link);
+    return this._super(store, snapshot, url);
+  },
+
   getTemplate(requestType) {
     return this.get(requestType + 'UrlTemplate') || this.get('urlTemplate');
   },
@@ -49,6 +61,14 @@ export default Ember.Mixin.create({
   // (https://github.com/emberjs/data/pull/3099)
   sortQueryParams(/* params */) {
     return {};
+  },
+
+  _urlFromLink(snapshot, urlTemplate) {
+    if (LINK_PREFIX_RE.test(urlTemplate)) {
+      return this.buildURL(null, snapshot.id, snapshot, urlTemplate.replace(LINK_PREFIX_RE, ''), {});
+    } else {
+      return urlTemplate;
+    }
   },
 
   urlSegments: {

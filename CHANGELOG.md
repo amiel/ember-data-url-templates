@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Support for relationship urlTemplates (#36)
 
 ## [0.3.1] - 2017-07-06
 
