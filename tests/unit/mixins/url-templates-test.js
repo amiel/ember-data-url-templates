@@ -165,5 +165,5 @@ test('it parameterizes nested queryParams as would normally be expected', functi
   const subject = BasicAdapter.create({ urlTemplate: '/posts{?query*}' });
   const params = { filter: { term: 'my' } };
   const url = subject.buildURL('post', null, null, 'query', params);
-  assert.equal(url, '/posts?filter[term]=my');
+  assert.equal(url, '/posts?filter%5Bterm%5D=my');
 });
