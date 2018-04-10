@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('posts');
+  this.route('search', { path: '/search/:term' });
   this.route('post', { path: '/posts/:slug' });
 });
 
