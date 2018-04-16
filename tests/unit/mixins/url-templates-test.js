@@ -160,3 +160,10 @@ test('it does not mutate null query param', function(assert) {
   subject.buildURL('post', null, null, 'query', params);
   assert.equal(params.tag, null);
 });
+
+test('it parameterizes nested queryParams as would normally be expected', function(assert) {
+  const subject = BasicAdapter.create({ urlTemplate: '/posts{?query*}' });
+  const params = { filter: { term: 'my' } };
+  const url = subject.buildURL('post', null, null, 'query', params);
+  assert.equal(url, '/posts?filter%5Bterm%5D=my');
+});

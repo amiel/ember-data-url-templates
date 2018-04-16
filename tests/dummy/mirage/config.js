@@ -1,8 +1,21 @@
+import deparam from 'dummy/utils/deparam';
+
 export default function() {
   this.timing = 1000;
   this.namespace = '/api';
 
-  this.get('/my-posts', 'post');
+  this.get('/my-posts', (schema, request) => {
+    const paramString = request.url.split('?')[1];
+    const queryParams = deparam(paramString);
+    const posts = schema.posts.all();
+
+    if (queryParams.filter) {
+      return posts.filter((post) => post.title.match(queryParams.filter.term));
+    } else {
+      return posts;
+    }
+  });
+
   this.get('/my-posts/:slug', (schema, request) => {
     return schema.posts.findBy({ slug: request.params.slug });
   });

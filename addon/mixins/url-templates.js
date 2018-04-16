@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import UriTemplate from 'uri-templates';
 import { LINK_PREFIX } from "ember-data-url-templates/mixins/url-templates-serializer";
+import flattenQueryParams from 'ember-data-url-templates/utils/flatten-query-params';
 
 const { isArray, copy, typeOf } = Ember;
 
@@ -88,7 +89,7 @@ export default Ember.Mixin.create({
         if (newQuery[param] === null ) { newQuery[param] = ""; }
       }
 
-      return newQuery;
+      return flattenQueryParams(newQuery);
     },
 
     // TODO: Support automatic relationship ids through snapshots api.
