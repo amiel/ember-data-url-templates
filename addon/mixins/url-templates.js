@@ -1,9 +1,10 @@
 import Ember from 'ember';
 import UriTemplate from 'uri-templates';
+import { assign } from '@ember/polyfills';
 import { LINK_PREFIX } from "ember-data-url-templates/mixins/url-templates-serializer";
 import flattenQueryParams from 'ember-data-url-templates/utils/flatten-query-params';
 
-const { isArray, copy, typeOf } = Ember;
+const { isArray, typeOf } = Ember;
 
 const ID_KEY_RE = /(_id|Id)$/;
 const LINK_PREFIX_RE = new RegExp(`^${LINK_PREFIX}`);
@@ -82,7 +83,7 @@ export default Ember.Mixin.create({
     },
 
     query(type, id, snapshot, query) {
-      var newQuery = copy(query);
+      var newQuery = assign({}, query);
 
       for (const param in newQuery) {
         if (newQuery[param] === undefined) { delete newQuery[param]; }
