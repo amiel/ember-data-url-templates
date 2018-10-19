@@ -1,15 +1,16 @@
-import Ember from 'ember';
+import { isArray } from '@ember/array';
+import { typeOf } from '@ember/utils';
+import Mixin from '@ember/object/mixin';
+import EmberObject from '@ember/object';
 import UriTemplate from 'uri-templates';
 import { assign } from '@ember/polyfills';
 import { LINK_PREFIX } from "ember-data-url-templates/mixins/url-templates-serializer";
 import flattenQueryParams from 'ember-data-url-templates/utils/flatten-query-params';
 
-const { isArray, typeOf } = Ember;
-
 const ID_KEY_RE = /(_id|Id)$/;
 const LINK_PREFIX_RE = new RegExp(`^${LINK_PREFIX}`);
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   mergedProperties: ['urlSegments'],
   buildURL(type, id, snapshot, requestType, query) {
     const templateString = this.getTemplate(requestType);
@@ -54,7 +55,7 @@ export default Ember.Mixin.create({
   // TODO: Add ability to customize templateResolver
   // TODO: Add reference to the adapter
   templateResolverFor(/* type */) {
-    return Ember.Object.create(this.get('urlSegments'));
+    return EmberObject.create(this.get('urlSegments'));
   },
 
   // HACK: Prevent query/queryRecord from appending query params to urls, we

@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import { readOnly } from '@ember/object/computed';
+import Controller from '@ember/controller';
 
-const { computed } = Ember;
-
-export default Ember.Controller.extend({
-  post: computed.readOnly('model'),
+export default Controller.extend({
+  post: readOnly('model'),
 
   actions: {
     publishPost(post) {

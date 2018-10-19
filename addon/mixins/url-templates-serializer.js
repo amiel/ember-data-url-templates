@@ -1,10 +1,9 @@
-import Ember from 'ember';
-
-const { get } = Ember;
+import { get } from '@ember/object';
+import Mixin from '@ember/object/mixin';
 
 export const LINK_PREFIX = 'urlTemplate:';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   normalize(modelClass) {
     let result = this._super(...arguments);
     return _injectLinksForRelationships(modelClass, result);

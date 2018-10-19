@@ -17,6 +17,7 @@
 
 
   <div id="comments">
+    {{log post.comments.length}}
     {{#each post.comments as |comment|}}
       <p>{{comment.message}}</p>
     {{/each}}

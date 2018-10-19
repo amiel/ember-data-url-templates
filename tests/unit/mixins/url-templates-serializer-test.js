@@ -1,10 +1,8 @@
-import Ember from 'ember';
+import EmberObject, { get } from '@ember/object';
 import UrlTemplatesSerializerMixin from 'ember-data-url-templates/mixins/url-templates-serializer';
 import { module, test } from 'qunit';
 
-const { get } = Ember;
-
-const BaseSerializer = Ember.Object.extend({
+const BaseSerializer = EmberObject.extend({
   normalize(modelClass, hash) {
     return {
       data: {
