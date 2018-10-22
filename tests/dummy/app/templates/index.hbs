@@ -1,0 +1,44 @@
+{{docs-hero
+  logo="ember-data"
+  slim-heading='URL'
+  strong-heading='Templates'
+  byline='build urls with templates instead of defining buildURL'
+}}
+
+
+<div class='docs-container docs-md'>
+  <section class='docs-section'>
+
+    <aside>Looking for the quickstart? {{link-to 'Click here' 'docs.quickstart'}}.</aside>
+
+    <p>
+      ember-data-url-templates is an addon to allow building urls with url templates instead of defining <code>buildURL</code> as described in <a href="https://github.com/emberjs/rfcs/pull/4" target="_blank" rel="noopener">emberjs/rfcs#4</a>.
+    </p>
+
+    <pre>
+      <code>
+        // app/adapters/comment.js
+
+        import Ember from "ember";
+        import DS from "ember-data";
+        import UrlTemplates from "ember-data-url-templates";
+
+        export default DS.RESTAdapter.extend(UrlTemplates, {
+          urlTemplate: '{+host}/comments{/id}',
+          queryUrlTemplate: '{+host}/comments{?query*}',
+          createRecordUrlTemplate: '{+host}/users/{userId}/comments',
+
+          session: Ember.inject.service(),
+
+          urlSegments: {
+            userId() {
+              return this.get('session.userId');
+            }
+          }
+        });
+      </code>
+    </pre>
+
+  </section>
+</div>
+
