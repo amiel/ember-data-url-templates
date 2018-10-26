@@ -50,4 +50,24 @@ module('Acceptance | basic url template', function(hooks) {
     assert.equal(findAll('#post-2').length, 1);
     assert.equal(findAll('#post-3').length, 0);
   });
+
+  test('it prevents ember-data from adding query params', async function(assert) {
+    server.create('post', {
+      slug: 'my-first-post',
+      title: 'This is my first post',
+    });
+
+    let queryParams, params;
+
+    server.get('/my-posts/:slug', (schema, request) => {
+      queryParams = request.queryParams;
+      params = request.params;
+      return schema.posts.findBy({ slug: request.params.slug });
+    });
+
+    await visit('/posts/my-first-post');
+
+    assert.equal(params.slug, 'my-first-post');
+    assert.ok(!queryParams.foo);
+  });
 });
