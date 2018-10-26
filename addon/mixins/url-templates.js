@@ -60,8 +60,9 @@ export default Mixin.create({
 
   // HACK: Prevent query/queryRecord from appending query params to urls, we
   // can do that in the template.
-  // TODO: Use dataForRequest when ds-improved-ajax lands
-  // (https://github.com/emberjs/data/pull/3099)
+  // TODO: ember-data plans to implement better hooks for customizing the
+  // request. Hopefully in the future, this hack can be removed and another
+  // hook used instead.
   sortQueryParams(/* params */) {
     return {};
   },
