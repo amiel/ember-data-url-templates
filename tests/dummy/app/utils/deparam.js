@@ -27,7 +27,7 @@
  * <script src="https://static.jsbin.com/js/embed.min.js?4.0.4"></script>
  */
 var digitTest = /^\d+$/,
-  keyBreaker = /([^\[\]]+)|(\[\])/g,
+  keyBreaker = /([^[\]]+)|(\[\])/g,
   paramTest = /([^?#]*)(#.*)?$/,
   entityRegex = /%([^0-9a-f][0-9a-f]|[0-9a-f][^0-9a-f]|[^0-9a-f][^0-9a-f])/i,
   prep = function (str) {

@@ -1,14 +1,11 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
+import { camelize } from '@ember/string';
 import UrlTemplatesMixin from 'ember-data-url-templates/mixins/url-templates';
 import { module, test } from 'qunit';
 
-const {
-  String: { camelize },
-} = Ember;
-
 module('UrlTemplatesMixin');
 
-const Adapter = Ember.Object.extend({
+const Adapter = EmberObject.extend({
   pathForType(type) {
     return camelize(type) + 's';
   }
@@ -30,7 +27,7 @@ const SegmentAdapter = Adapter.extend(UrlTemplatesMixin, {
   urlTemplate: '/users/{userId}/posts{/category}',
   sessionId: 123,
 
-  urlSegments: {
+  urlSegments: { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects
     // normally this would be a
     userId: function() { return this.get('sessionId'); },
     category: function(type, id, snapshot, query) {
