@@ -2586,10 +2586,14 @@ ember-cli-uglify@^2.0.0:
     broccoli-uglify-sourcemap "^2.1.1"
     lodash.defaultsdeep "^4.6.0"
 
-ember-cli-uri-templates-shim@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/ember-cli-uri-templates-shim/-/ember-cli-uri-templates-shim-0.0.1.tgz#539986dd0d303fab51e408daf16d22121e68776d"
+ember-cli-uri-templates-shim@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/ember-cli-uri-templates-shim/-/ember-cli-uri-templates-shim-0.0.2.tgz#b8ec9573c3e5e03f0b9bae50168b11a2b96deb08"
+  integrity sha512-hg7p6CUHkGSnbfcpB1GyX2++78tjrJO/iOrCo0u41a9aOP3vML0TR3CxhwmlU/8iawvCFQJ4Sv+sUykRaCJe/A==
   dependencies:
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^2.0.0"
+    broccoli-string-replace "^0.1.2"
     ember-cli-babel "^6.0.0"
     ember-cli-node-assets "^0.2.2"
     uri-templates "^0.2.0"
