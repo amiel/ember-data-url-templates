@@ -39,9 +39,9 @@ export default Mixin.create({
     return this._super(store, snapshot, url, relationship);
   },
 
-  findBelongsTo(store, snapshot, link) {
+  findBelongsTo(store, snapshot, link, relationship) {
     const url = this._urlFromLink(snapshot, link);
-    return this._super(store, snapshot, url);
+    return this._super(store, snapshot, url, relationship);
   },
 
   getTemplate(requestType) {
