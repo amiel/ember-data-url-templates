@@ -36,12 +36,12 @@ export default Mixin.create({
 
   findHasMany(store, snapshot, link, relationship) {
     const url = this._urlFromLink(snapshot, link);
-    return this._super(...arguments);
+    return this._super(store, snapshot, url, relationship);
   },
 
-  findBelongsTo(store, snapshot, link, relationship) {
+  findBelongsTo(store, snapshot, link) {
     const url = this._urlFromLink(snapshot, link);
-    return this._super(...arguments);
+    return this._super(store, snapshot, url);
   },
 
   getTemplate(requestType) {
