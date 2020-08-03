@@ -1,6 +1,6 @@
 {
   "name": "ember-data-url-templates",
-  "version": "0.4.3",
+  "version": "0.4.5",
   "description": "An ember-addon to allow building urls with url templates instead of defining buildURL.",
   "keywords": [
     "ember-addon"
