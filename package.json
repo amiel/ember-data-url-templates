@@ -63,5 +63,9 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
+  },
+  "volta": {
+    "node": "12.22.7",
+    "npm": "8.3.0"
   }
 }
