@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ 'master', 'v*' ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ember-try-scenario:
+          - ember-lts-3.4
+          - ember-lts-3.8
+          - ember-lts-3.12
+          - ember-lts-3.16
+          - ember-release
+          - ember-beta
+          - ember-canary
+          - ember-default
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v1
+
+      - name: Run Tests
+        run: |
+          npm install
+          npx ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
+
+#      - name: Coveralls
+#        uses: coverallsapp/github-action@master
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
