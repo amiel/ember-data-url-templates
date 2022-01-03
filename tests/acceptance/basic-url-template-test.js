@@ -1,15 +1,14 @@
 import { module, test } from 'qunit';
 import { visit, findAll, find } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
-import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { setupMirage } from 'ember-cli-mirage/test-support';
 
 module('Acceptance | basic url template', function(hooks) {
   setupApplicationTest(hooks);
-
   setupMirage(hooks);
 
   test('it can use a simple custom url', async function(assert) {
-    server.createList('post', 5);
+    this.server.createList('post', 5);
 
     await visit('/posts');
     assert.equal(findAll('#posts .post').length, 5);

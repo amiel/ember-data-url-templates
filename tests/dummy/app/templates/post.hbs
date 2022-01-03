@@ -1,31 +1,33 @@
-<div id="post-{{post.id}}" class="post">
-  <h2>{{post.title}}</h2>
+<div id="post-{{this.post.id}}" class="post">
+  <h2>{{this.post.title}}</h2>
 
-  <p id="author">by {{post.author.name}}</p>
+  <p id="author">by {{this.post.author.name}}</p>
 
-  {{#unless post.isPublished}}
-    <a id="publish-post" {{action 'publishPost' post}}>Publish Post</a>
+  {{#unless this.post.isPublished}}
+    <a id="publish-post" {{action this.publishPost this.post}}>Publish Post</a>
   {{/unless}}
 
-  <h3>Comments</h3>
+  <h3>Reactions</h3>
 
   <div id="reactions">
-    {{#each post.reactions as |reaction|}}
+    {{#each this.post.reactions as |reaction|}}
       <p>{{reaction.verb}} by {{reaction.name}}</p>
     {{/each}}
   </div>
 
+  <h3>Comments</h3>
 
   <div id="comments">
-    {{log post.comments.length}}
-    {{#each post.comments as |comment|}}
+    {{#each this.post.comments as |comment|}}
       <p>{{comment.message}}</p>
     {{/each}}
   </div>
 
+  <h3>Related Posts</h3>
+
   <div id="related-posts">
-    {{#each post.relatedPosts as |post|}}
-      <p>{{#link-to 'post' post}}{{post.title}}{{/link-to}}</p>
+    {{#each this.post.relatedPosts as |post|}}
+      <p><LinkTo @route='post' @model={{post}}>{{post.title}}</LinkTo></p>
     {{/each}}
   </div>
 </div>

@@ -1,12 +1,11 @@
 import { get } from '@ember/object';
-import { visit, findAll, find } from '@ember/test-helpers';
+import { visit, findAll, find, waitFor, waitUntil } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { setupMirage } from 'ember-cli-mirage/test-support';
 
-module('Acceptance | simple relationships', async function(hooks) {
+module('Acceptance | simple relationships', function(hooks) {
   setupApplicationTest(hooks);
-
   setupMirage(hooks);
 
   hooks.beforeEach(function () {
@@ -33,6 +32,7 @@ module('Acceptance | simple relationships', async function(hooks) {
   // urlTemplate.
   test('it can use a belongsTo id from the snapshot when generating a url', async function(assert) {
     await visit(`/posts/${get(this.post, 'slug')}`);
+    await waitFor('#comments p');
     assert.equal(findAll('#comments p').length, 1);
   });
 
@@ -41,6 +41,7 @@ module('Acceptance | simple relationships', async function(hooks) {
   // the post adapter reactionsUrlTemplate.
   test('it can load a hasMany relationship from just a url template', async function(assert) {
     await visit(`/posts/${get(this.post, 'slug')}`);
+    await waitFor('#reactions p');
     assert.equal(findAll('#reactions p').length, 4);
   });
 
@@ -49,6 +50,7 @@ module('Acceptance | simple relationships', async function(hooks) {
   // and the post adapter authorUrlTemplate.
   test('it can load a belongsTo relationship from just a url template', async function(assert) {
     await visit(`/posts/${get(this.post, 'slug')}`);
+    await waitUntil(() => find('#author')?.innerText?.trim().length > 0);
     assert.equal(find('#author').innerText, `by ${this.author.name}`);
   });
 
@@ -57,6 +59,7 @@ module('Acceptance | simple relationships', async function(hooks) {
   // functionality for links.
   test('it can load related posts through the normal links method', async function(assert) {
     await visit(`/posts/${get(this.post, 'slug')}`);
+    await waitFor('#related-posts p');
     assert.equal(findAll('#related-posts p').length, 2);
   });
 });
