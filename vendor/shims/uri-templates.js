@@ -8,5 +8,6 @@
     };
   }
 
+  /* eslint-disable-next-line no-undef */
   define('uri-templates', [], vendorModule);
 })();
