@@ -31,7 +31,7 @@ jobs:
         run: |
           yarn
           yarn run lint:js
-          npx ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
+          ./node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
 
 #      - name: Coveralls
 #        uses: coverallsapp/github-action@master
