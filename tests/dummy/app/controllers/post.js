@@ -1,13 +1,11 @@
-import { readOnly } from '@ember/object/computed';
 import Controller from '@ember/controller';
+import { readOnly } from '@ember/object/computed';
 
-export default Controller.extend({
-  post: readOnly('model'),
+export default class PostController extends Controller {
+  @readOnly('model') post;
 
-  actions: {
-    publishPost(post) {
-      post.set('isPublished', true);
-      post.save();
-    },
-  },
-});
+  publishPost(post) {
+    post.set('isPublished', true);
+    post.save();
+  }
+}

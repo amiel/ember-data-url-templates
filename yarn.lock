@@ -2880,13 +2880,6 @@ broccoli-kitchen-sink-helpers@^0.3.1:
     glob "^5.0.10"
     mkdirp "^0.5.1"
 
-broccoli-merge-trees@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/broccoli-merge-trees/-/broccoli-merge-trees-2.0.0.tgz#10aea46dd5cebcc8b8f7d5a54f0a84a4f0bb90b9"
-  dependencies:
-    broccoli-plugin "^1.3.0"
-    merge-trees "^1.0.1"
-
 broccoli-merge-trees@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/broccoli-merge-trees/-/broccoli-merge-trees-3.0.1.tgz#545dfe9f695cec43372b3ee7e63c7203713ea554"
@@ -4500,16 +4493,6 @@ ember-cli-preprocess-registry@^3.3.0:
     debug "^3.0.1"
     process-relative-require "^1.0.0"
 
-ember-cli-shims@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-shims/-/ember-cli-shims-1.2.0.tgz#0f53aff0aab80b5f29da3a9731bac56169dd941f"
-  dependencies:
-    broccoli-file-creator "^1.1.1"
-    broccoli-merge-trees "^2.0.0"
-    ember-cli-version-checker "^2.0.0"
-    ember-rfc176-data "^0.3.1"
-    silent-error "^1.0.1"
-
 ember-cli-sri@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ember-cli-sri/-/ember-cli-sri-2.1.1.tgz#971620934a4b9183cf7923cc03e178b83aa907fd"
@@ -4566,13 +4549,6 @@ ember-cli-typescript@^4.1.0:
     semver "^7.3.2"
     stagehand "^1.0.0"
     walk-sync "^2.2.0"
-
-ember-cli-version-checker@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-version-checker/-/ember-cli-version-checker-2.0.0.tgz#e1f7d8e4cdcd752ac35f1611e4daa8836db4c4c7"
-  dependencies:
-    resolve "^1.3.3"
-    semver "^5.3.0"
 
 ember-cli-version-checker@^3.1.3:
   version "3.1.3"
@@ -4804,10 +4780,6 @@ ember-resolver@8.0.3:
     ember-cli-babel "^7.26.6"
     ember-cli-version-checker "^5.1.2"
     resolve "^1.20.0"
-
-ember-rfc176-data@^0.3.1:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.5.tgz#f630e550572c81a5e5c7220f864c0f06eee9e977"
 
 ember-rfc176-data@^0.3.15, ember-rfc176-data@^0.3.17:
   version "0.3.17"
@@ -5925,7 +5897,7 @@ fs-merger@^3.2.1:
     fs-tree-diff "^2.0.1"
     walk-sync "^2.2.0"
 
-fs-tree-diff@^0.5.2, fs-tree-diff@^0.5.3, fs-tree-diff@^0.5.4, fs-tree-diff@^0.5.6:
+fs-tree-diff@^0.5.2, fs-tree-diff@^0.5.3, fs-tree-diff@^0.5.6:
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/fs-tree-diff/-/fs-tree-diff-0.5.6.tgz#342665749e8dca406800b672268c8f5073f3e623"
   dependencies:
@@ -7786,17 +7758,6 @@ merge-stream@^2.0.0:
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
   integrity sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==
 
-merge-trees@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/merge-trees/-/merge-trees-1.0.1.tgz#ccbe674569787f9def17fd46e6525f5700bbd23e"
-  dependencies:
-    can-symlink "^1.0.0"
-    fs-tree-diff "^0.5.4"
-    heimdalljs "^0.2.1"
-    heimdalljs-logger "^0.1.7"
-    rimraf "^2.4.3"
-    symlink-or-copy "^1.0.0"
-
 merge-trees@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/merge-trees/-/merge-trees-2.0.0.tgz#a560d796e566c5d9b2c40472a2967cca48d85161"
@@ -9251,7 +9212,7 @@ resolve-url@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
 
-resolve@^1.1.6, resolve@^1.3.3:
+resolve@^1.1.6:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.3.3.tgz#655907c3469a8680dc2de3a275a8fdd69691f0e5"
   dependencies:
